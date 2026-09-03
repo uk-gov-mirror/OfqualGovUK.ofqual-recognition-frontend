@@ -297,6 +297,11 @@ public class ApplicationController : Controller
 
         if (taskDetails.Stage == StageType.Declaration)
         {
+            if(formdata.Answer != StatusType.Completed)
+            {
+                return Redirect(RouteConstants.ApplicationConstants.TASK_LIST_PATH);
+            }
+
             Application? submitted = await _applicationService.SubmitApplication(application.ApplicationId);
             if (submitted == null || !submitted.Submitted)
             {
